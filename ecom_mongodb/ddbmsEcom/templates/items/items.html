@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Home
+{% endblock title %}
+{% block content %}
+<div class="container">
+    {% if items %}
+    <div class="row">
+    {% for item in  items %}
+        <div class="col-sm-4 ">
+            <div class="card m-2" style="width: 15rem; ">
+               <img src="data:image/jpeg;base64,{{ item.prodImage }}" class="card-img-top" style="height: 7rem; width:15rem" alt="">
+                <!-- <img src="{{ item.prodImage }}" class="card-img-top" alt="Image" style="height: 7rem; width:15rem"> -->
+                <div class="card-body">
+                    <p class="card-text">{{item.title}}</p>
+                    <table class="p-2">
+                        <tr>
+                            <td>
+                                <form action="{% url 'addToCart' %}" method="post">
+                                    {% csrf_token %}
+                                    {% load custom_tags %}
+                                    <input type="hidden" name="prod_id" value = "{{item|mongo_id}}" id="add_prod_id">
+                                    <button type="submit" class="btn btn-sm btn-outline-primary">Cart</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="prod_id" value = {{item.id}} id="buy_prod_id">
+                                    <button type="submit" class="btn btn-sm btn-outline-primary">Buy</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}

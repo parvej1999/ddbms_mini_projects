@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}
+Cart List
+{% endblock title %}
+{% block content %}
+<div class="container-fluid">
+
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Item Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for cart_item in cart_list %}
+                <tr>
+
+                    {% load custom_tags %}
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{cart_item.title}}</td>
+                    <td>{{cart_item.price}}</td>
+                    <td>{{cart_item.quantity}}</td>
+                    <td><form action="{% url 'remove_cart' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="prod_id" value="{{cart_item|mongo_id}}">
+                        <input type="submit" class="btn btn-prime" value="Remove">
+                    </form></td>
+                </tr>
+            {% endfor %}
+        
+        </tbody>
+      </table>
+
+</div>
+
+{% endblock content %}

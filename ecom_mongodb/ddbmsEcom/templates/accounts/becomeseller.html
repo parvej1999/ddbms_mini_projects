@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block %}
+Become Seller
+{% endblock %}
+{% block content %}
+<div class="parent">
+    <div class="card card-center m-2" style="width:18rem">
+        <div class="card-body">
+          <h5 class="card-title">Become Seller</h5>
+            <form method="post" action="{% url 'becomeSeller' %}">
+              {% csrf_token %}
+              <input type="hidden" name = 'currentUserId' value="{{request.user.id}}">
+              <div class="form-group">
+                <label for="phnumber">Phone Number</label>
+                <input required type="text" name="phnumber" class="form-control" id="phnumber" placeholder="Enter Phone Number">
+              </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea required type="text" name="address" class="form-control" id="address" placeholder="Your address?"></textarea>
+                </div>
+                <div class="form-group m-1">
+                    <label for="idtype">Id Type</label>
+                    <select required name="idtype" id="idtype" class="form-select" aria-label="Default select example">
+                            <option selected>Select Id Type</option>
+                            <option value="Adhar">Adhaar Card</option>
+                            <option value="pan">Pan Card</option>
+                            <option value="passport">Passport</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="idnumber">Id card Number</label>
+                    <input required type="text" name="idnumber" class="form-control" id="idnumber" placeholder="Enter Id Card Number">
+                </div>
+                <div class="form-group">
+                    <label for="accnumber">Account Number</label>
+                    <input required type="text" name="accnumber" class="form-control" id="accnumber" placeholder="Enter Account Number">
+                </div>
+                <div class="form-group m-2">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
