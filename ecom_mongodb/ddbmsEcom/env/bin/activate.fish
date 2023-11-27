@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/parvej/Desktop/ecom/ddbmsEcom/env"
+set -gx VIRTUAL_ENV "/home/parvej/Desktop/Ecom Webistes/ecom_mongodb/ddbmsEcom/env"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

@@ -41,11 +41,8 @@ def home(request):
     items = item_collection.find()
     # items = item.objects.all()
     # print(items)
-    cart_items = get_cart_item(request.user)
-    print(cart_items)
     context = {
         'items': items,
-        'cart_items':cart_items,
     }
     # if request.user.is_authenticated:
     #     pass
@@ -114,6 +111,7 @@ def add_to_cart(request):
         
     return redirect("home")
 
+@login_required
 def remove_cart_item(request):
     
     if request.method == "POST":
@@ -141,6 +139,7 @@ def remove_cart_item(request):
 
     return redirect('showCart')
 
+@login_required
 def show_cart(request):
     
     cart_items = get_cart_item(request.user)
